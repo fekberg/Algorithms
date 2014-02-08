@@ -11,13 +11,13 @@ namespace Peak_Finding
         static void Main(string[] args)
         {
             int[][] problem = new[]{
-	            new [] {0,  0,  9,  7,  0,  0,  0},
-	            new [] {0,  0,  0,  7,  0,  0,  0},
-	            new [] {0,  1,  0,  7,  0,  0,  0},
-	            new [] {0,  2,  0,  7,  0,  0,  0},
-	            new [] {0,  3,  0,  7,  8,  0,  0},
-	            new [] {0,  5,  6,  7,  0,  0,  0},
-	            new [] {0,  4,  7,  7,  0,  0,  0},
+	            new [] {0,  0,  9,  0,  0,  0,  0},
+	            new [] {0,  0,  0,  0,  0,  0,  0},
+	            new [] {0,  1,  0,  0,  0,  0,  0},
+	            new [] {0,  2,  0,  0,  0,  0,  0},
+	            new [] {0,  3,  0,  0,  0,  0,  0},
+	            new [] {0,  5,  0,  0,  0,  0,  0},
+	            new [] {0,  4,  6,  0,  0,  0,  0},
             };
             int peak = new Program().FindPeak(problem);
 
@@ -25,18 +25,20 @@ namespace Peak_Finding
         }
 
 
-        int FindPeak(int[][] problem, int j = -1)
+        int FindPeak(int[][] problem, int left = 0, int right = -1)
         {
             if (problem.Length <= 0) return 0;
 
-            if (j == -1) j = problem.Length / 2;
+            if (right == -1) right = problem.Length;
+
+            int j = (left + right) / 2;
             int globalMax = FindGlobalMax(problem, j);
 
             if (
                 (globalMax - 1 > 0 &&
                 problem[globalMax][j] >=
                 problem[globalMax - 1][j]) &&
-
+                
                 (globalMax + 1 < problem.Length &&
                 problem[globalMax][j] >=
                 problem[globalMax + 1][j]) &&
@@ -52,13 +54,15 @@ namespace Peak_Finding
             {
                 return problem[globalMax][j];
             }
-            else if (problem[globalMax][j - 1] > problem[globalMax][j])
+            else if (j > 0 && problem[globalMax][j - 1] > problem[globalMax][j])
             {
-                return FindPeak(problem, j / 2);
+                right = j;
+                return FindPeak(problem, left, right);
             }
-            else if (problem[globalMax][j + 1] > problem[globalMax][j])
+            else if (j + 1 < problem[globalMax].Length && problem[globalMax][j + 1] > problem[globalMax][j])
             {
-                return FindPeak(problem, j * 2);
+                left = j;
+                return FindPeak(problem, left, right);
             }
 
             return problem[globalMax][j];
