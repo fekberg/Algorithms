@@ -11,13 +11,13 @@ namespace Peak_Finding
         static void Main(string[] args)
         {
             int[][] problem = new[]{
-	            new [] {0,  0,  9,  0,  0,  0,  0},
-	            new [] {0,  0,  0,  0,  0,  0,  0},
-	            new [] {0,  1,  0,  0,  0,  0,  0},
-	            new [] {0,  2,  0,  0,  0,  0,  0},
-	            new [] {0,  3,  0,  0,  0,  0,  0},
-	            new [] {0,  5,  0,  0,  0,  0,  0},
-	            new [] {0,  4,  7,  0,  0,  0,  0},
+	            new [] {0,  0,  9,  7,  0,  0,  0},
+	            new [] {0,  0,  0,  7,  0,  0,  0},
+	            new [] {0,  1,  0,  7,  0,  0,  0},
+	            new [] {0,  2,  0,  7,  0,  0,  0},
+	            new [] {0,  3,  0,  7,  8,  0,  0},
+	            new [] {0,  5,  6,  7,  0,  0,  0},
+	            new [] {0,  4,  7,  7,  0,  0,  0},
             };
             int peak = new Program().FindPeak(problem);
 
@@ -58,7 +58,7 @@ namespace Peak_Finding
             }
             else if (problem[globalMax][j + 1] > problem[globalMax][j])
             {
-                return FindPeak(problem, problem.Length - (j / 2));
+                return FindPeak(problem, j * 2);
             }
 
             return problem[globalMax][j];
@@ -66,7 +66,7 @@ namespace Peak_Finding
 
         int FindGlobalMax(int[][] problem, int column)
         {
-            int max = problem[0][column];
+            int max = 0;
             int index = 0;
             for (int i = 0; i < problem.Length; i++)
             {
