@@ -11,14 +11,14 @@ namespace Peak_Finding
         static void Main(string[] args)
         {
             int[][] problem = new[]{
-		        new [] {0,  0,  9,  0,  0,  0,  0},
-		        new [] {0,  0,  0,  0,  0,  0,  0},
-		        new [] {0,  1,  0,  0,  0,  0,  0},
-		        new [] {0,  2,  0,  0,  0,  0,  0},
-		        new [] {0,  0,  0,  0,  0,  0,  0},
-		        new [] {0,  0,  0,  0,  0,  0,  0},
-		        new [] {0,  0,  0,  0,  0,  0,  0},
-	        };
+	            new [] {0,  0,  9,  0,  0,  0,  0},
+	            new [] {0,  0,  0,  0,  0,  0,  0},
+	            new [] {0,  1,  0,  0,  0,  0,  0},
+	            new [] {0,  2,  0,  0,  0,  0,  0},
+	            new [] {0,  3,  0,  0,  0,  0,  0},
+	            new [] {0,  5,  0,  0,  0,  0,  0},
+	            new [] {0,  7,  4,  0,  0,  0,  0},
+            };
 
             Console.WriteLine("Found a peak with value	: {0}", FindMax(problem));
         }
@@ -36,15 +36,17 @@ namespace Peak_Finding
                 problem[globalMax][j] >=
                 problem[globalMax - 1][j]) &&
 
+                (globalMax + 1 < problem.Length &&
                 problem[globalMax][j] >=
-                problem[globalMax + 1][j] &&
+                problem[globalMax + 1][j]) &&
 
                 (j - 1 > 0 &&
                 problem[globalMax][j] >=
                 problem[globalMax][j - 1]) &&
 
+                (j + 1 < problem[globalMax].Length &&
                 problem[globalMax][j] >=
-                problem[globalMax][j + 1]
+                problem[globalMax][j + 1])
                 )
             {
                 return problem[globalMax][j];
