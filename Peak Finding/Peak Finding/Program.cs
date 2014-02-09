@@ -13,7 +13,7 @@ namespace Peak_Finding
             int[][] problem = new[]{
 	            new [] {0,  0,  9,  0,  0,  0,  0},
 	            new [] {0,  0,  0,  0,  0,  0,  0},
-	            new [] {0,  1,  0,  0,  0,  0,  0},
+	            new [] {0,  1,  0,  6,  7,  8,  9, 10},
 	            new [] {0,  2,  0,  0,  0,  0,  0},
 	            new [] {0,  3,  0,  0,  0,  0,  0},
 	            new [] {0,  5,  0,  0,  0,  0,  0},
@@ -38,7 +38,7 @@ namespace Peak_Finding
                 (globalMax - 1 > 0 &&
                 problem[globalMax][j] >=
                 problem[globalMax - 1][j]) &&
-                
+
                 (globalMax + 1 < problem.Length &&
                 problem[globalMax][j] >=
                 problem[globalMax + 1][j]) &&
