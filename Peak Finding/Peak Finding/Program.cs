@@ -29,7 +29,7 @@ namespace Peak_Finding
         {
             if (problem.Length <= 0) return 0;
 
-            if (right == -1) right = problem.Length;
+            if (right == -1) right = problem[0].Length;
 
             int j = (left + right) / 2;
             int globalMax = FindGlobalMax(problem, j);
